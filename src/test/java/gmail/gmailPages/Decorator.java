@@ -82,10 +82,10 @@ import java.util.List;
             return null;
         }
 
-       /* public <X> X getScreenshotAs(OutputType<X> target)
+      /* public <X> X getScreenshotAs(OutputType<File> target)
                 throws WebDriverException {
             return driver.getScreenshotAs(target);
-        }
-*/
+        }*/
+
     }
 

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
+import static gmail.HighlightElement.highLightElementWihoutScreenshot;
 
 
 public class LoginPage extends BasePage {
@@ -74,6 +74,7 @@ public class LoginPage extends BasePage {
         private void executeLogin(String username, String password){
 
             WebElement until = new WebDriverWait(driver, 3l).until(ExpectedConditions.visibilityOf(UserLoginInput));
+            highLightElementWihoutScreenshot(driver,UserLoginInput);
             UserLoginInput.sendKeys(username);
             NextButton.click();
             WebDriverWait wait = new WebDriverWait(driver, 10);
