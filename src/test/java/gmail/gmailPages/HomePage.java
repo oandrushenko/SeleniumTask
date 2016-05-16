@@ -2,20 +2,32 @@ package gmail.gmailPages;
 
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
+
 public class HomePage extends BasePage{
 
-    private static final By composeNewMail=By.xpath("//div[text()='COMPOSE']");
+
+
+
+    @FindBy(xpath ="//div[text()='COMPOSE']" )
+    private WebElement composeNewMail;
+
+
     private static final By pressSpamButton= By.xpath("//a[contains(text(),'Spam')]");
     private static final By pressInboxFolder = By.xpath("//a[contains(text(),'Inbox')]");
     private static final By searchInBox= By.id("gbqfq");
     private static final String searchText=("in:spam seleniumtask4.1@gmail.com");
     private static final By checkBoxForMail = By.xpath("//table[contains(@class, 'F')]//tr[1]//td[2]//div[@role='checkbox']");
 
+
     public HomePage(WebDriver driver){
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
    public java.lang.String getMsg() throws Exception{
@@ -23,9 +35,11 @@ public class HomePage extends BasePage{
    }
 
     public ComposeMailPage clickCompose() {
+
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(composeNewMail));
-        driver.findElement(composeNewMail).click();
+        WebElement element =wait.until(ExpectedConditions.visibilityOf(composeNewMail));
+        composeNewMail.click();
+
         return new ComposeMailPage(driver);
     }
 
@@ -42,6 +56,7 @@ public class HomePage extends BasePage{
     }
 
     public HomePage checkSpam() {
+
         driver.findElement(searchInBox).sendKeys(searchText + Keys.ENTER);
         return new HomePage(driver);
     }

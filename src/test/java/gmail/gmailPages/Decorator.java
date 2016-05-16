@@ -6,6 +6,8 @@ import org.openqa.selenium.*;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.JavascriptExecutor;
+
+import java.io.File;
 import java.util.List;
     import java.util.Set;
 
@@ -79,5 +81,11 @@ import java.util.List;
         public Object executeAsyncScript(String s, Object... objects) {
             return null;
         }
+
+       /* public <X> X getScreenshotAs(OutputType<X> target)
+                throws WebDriverException {
+            return driver.getScreenshotAs(target);
+        }
+*/
     }
 

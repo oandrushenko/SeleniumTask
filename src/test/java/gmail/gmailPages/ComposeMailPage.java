@@ -1,30 +1,49 @@
 package gmail.gmailPages;
 
+import gmail.CaptureScreenshot;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static gmail.CaptureScreenshot.screenshot;
+import static gmail.HighlightElement.highLightElement;
 
 
 public class ComposeMailPage extends BasePage{
 
-    private static final By composeNewMail= By.xpath("//div[text()='COMPOSE']");
+
+
+    @FindBy(xpath="//input[@name='subjectbox']")
+    private WebElement subjectIs;
+
+    @FindBy(xpath="//div[text()='Send']")
+    private WebElement sendButton;
+
     private static final By sendTo=By.xpath("//textarea[@name='to']");
-    private static final By subjectIs=By.xpath("//input[@name='subjectbox']") ;
-    private static final By messageBody=By.xpath("//div[@role='textbox']");
-    private static final By sendButton=By.xpath("//div[text()='Send']");
+
+    @FindBy(xpath="//div[@role='textbox']")
+    private WebElement messageBody;
+
 
     public ComposeMailPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
 
     }
 
 
     public HomePage composeNewMail(String recipient, String subject, String message) {
         new WebDriverWait(driver, 3l).until(ExpectedConditions.presenceOfElementLocated(sendTo)).sendKeys(recipient);
-        driver.findElement(subjectIs).sendKeys(subject);
-        driver.findElement(messageBody).sendKeys(message);
-        driver.findElement(sendButton).click();
+
+       subjectIs.sendKeys(subject);
+        highLightElement(driver,messageBody);
+        messageBody.sendKeys(message);
+
+        sendButton.click();
 
         return new HomePage(driver);
     }

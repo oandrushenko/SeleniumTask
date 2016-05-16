@@ -1,5 +1,7 @@
 import gmail.gmailPages.Decorator;
 import gmail.gmailPages.LoginPage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
@@ -14,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class BaseTest {
     protected WebDriver driver;
     private final String url = "https://accounts.google.com/";
+    public Logger logger = LogManager.getRootLogger();
 
     public LoginPage getLoginPage() {
         driver.get(url);
@@ -25,7 +28,7 @@ public class BaseTest {
     cap.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
             UnexpectedAlertBehaviour.DISMISS);
     driver = new FirefoxDriver();
-    driver = new Decorator(driver);
+    /*driver = new Decorator(driver);*/
     driver.manage().timeouts().implicitlyWait(6l, TimeUnit.SECONDS);
     driver.manage().timeouts().pageLoadTimeout(10l, TimeUnit.SECONDS);
 
@@ -34,7 +37,7 @@ public class BaseTest {
 
     @After
     public void tearDown()
-    {
+    {logger.info("Test is completed");
         driver.quit();
     }
 }
