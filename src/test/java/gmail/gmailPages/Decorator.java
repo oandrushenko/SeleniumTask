@@ -12,7 +12,7 @@ import java.util.List;
     import java.util.Set;
 
 
-    public class Decorator implements WebDriver,JavascriptExecutor  {
+    public class Decorator implements WebDriver,JavascriptExecutor, TakesScreenshot  {
 
         protected WebDriver driver;
 
@@ -75,17 +75,16 @@ import java.util.List;
         }
 
         public Object executeScript(String s, Object... objects) {
-            return null;
+            return ((JavascriptExecutor) driver).executeScript(s, objects);
         }
 
         public Object executeAsyncScript(String s, Object... objects) {
-            return null;
+            return ((JavascriptExecutor) driver).executeAsyncScript(s, objects);
         }
 
-      /* public <X> X getScreenshotAs(OutputType<File> target)
-                throws WebDriverException {
-            return driver.getScreenshotAs(target);
-        }*/
+        public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
+            return ((TakesScreenshot) driver).getScreenshotAs(outputType);
+        }
 
     }
 

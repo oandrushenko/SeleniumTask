@@ -28,7 +28,7 @@ public class BaseTest {
     cap.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
             UnexpectedAlertBehaviour.DISMISS);
     driver = new FirefoxDriver();
-    /*driver = new Decorator(driver);*/
+    driver = new Decorator(driver);
     driver.manage().timeouts().implicitlyWait(6l, TimeUnit.SECONDS);
     driver.manage().timeouts().pageLoadTimeout(10l, TimeUnit.SECONDS);
 
